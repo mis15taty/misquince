@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Invitación — XV de Taty</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Tipografías elegantes -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --rosa-fondo: #9fc2e4;
+            --rosa: #9fc9ef;
+            --rosa-oscuro: #7fb3e3;
+            --lila: #7fb3e3;
+            --celeste-oscuro: #4d73c4;
+            --gris-texto: #4b4f58;
+            --blanco: #ffffff;
+            --borde-suave: rgba(255, 255, 255, 0.7);
+            --sombra-suave: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radio-grande: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #eef5ff 0, #f5f9ff 40%, #e7edff 100%);
+            color: var(--gris-texto);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px 12px 40px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+        }
+
+        /* Botón flotante de música */
+        .music-btn {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            width: 52px;
+            height: 52px;
+            border-radius: 999px;
+            border: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 30% 20%, #eaf8ff, #9ecbff);
+            box-shadow: 0 12px 24px rgba(84, 174, 248, 0.4);
+            cursor: pointer;
+            z-index: 50;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .music-btn span {
+            font-size: 24px;
+        }
+
+        .music-btn.is-playing {
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Tarjeta principal */
+        .card {
+            background: rgba(255, 255, 255, 0.88);
+            border-radius: 28px;
+            box-shadow: var(--sombra-suave);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            padding: 18px 16px 26px;
+            backdrop-filter: blur(12px);
+        }
+
+        .card+.card {
+            margin-top: 18px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .hero-heart {
+            margin-bottom: 6px;
+        }
+
+        .hero-heart img {
+            width: 70px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .date-chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--borde-suave);
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #777;
+            margin-bottom: 8px;
+        }
+
+        .hero-subtitle {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        .hero-tagline {
+            font-size: 13px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        .hero-name {
+            font-family: "Great Vibes", "Playfair Display", serif;
+            font-size: 42px;
+            line-height: 1.1;
+            color: var(--celeste-oscuro);
+            margin-bottom: 10px;
+        }
+
+        .hero-note {
+            font-size: 13px;
+            color: #777;
+            max-width: 260px;
+            margin: 0 auto 12px;
+        }
+
+        .hero-divider {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--celeste-oscuro), transparent);
+            margin: 8px auto 14px;
+        }
+
+        .pill-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--borde-suave);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .pill-title span {
+            font-size: 13px;
+        }
+
+        /* Contador */
+        .countdown-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .countdown-label {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 6px;
+            margin-top: 8px;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .countdown-item {
+            background: linear-gradient(145deg, #ffffff, #e8f0ff);
+            border-radius: 16px;
+            padding: 6px 4px 8px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 10px rgba(119, 110, 171, 0.08);
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: #444;
+            line-height: 1.1;
+        }
+
+        .countdown-text {
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #888;
+            margin-top: 3px;
+        }
+
+        /* Sección info fiesta */
+        .two-cols {
+            display: grid;
+            grid-template-columns: 1.1fr 2fr;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .heart-gif img {
+            width: 100%;
+            max-width: 120px;
+            border-radius: 24px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #444;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .info-list {
+            list-style: none;
+            text-align: left;
+            font-size: 13px;
+            line-height: 1.4;
+            padding-left: 0;
+        }
+
+        .info-list li+li {
+            margin-top: 4px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 10px;
+            color: #999;
+            display: block;
+            margin-bottom: 1px;
+        }
+
+        .info-value {
+            color: #444;
+        }
+
+        /* Botones */
+        .btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 0;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #9fc9ef, #7fb3e3);
+            color: #fff;
+            box-shadow: 0 8px 18px rgba(95, 178, 255, 0.35);
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #555;
+            border: 1px solid rgba(182, 211, 255, 0.8);
+        }
+
+        .btn span.icon {
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Carrusel simple (slider touch) */
+        .slider {
+            overflow: hidden;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+            position: relative;
+            background: #000;
+            margin-top: 8px;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+            height: 260px;
+            /* altura fija para todos los slides */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eef4fa;
+            /* color de fondo de “marco” */
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            /* que no se deforme horizontalmente */
+            height: auto;
+            /* que no se deforme verticalmente   */
+            display: block;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .slider-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .slider-dot.active {
+            width: 16px;
+            background: #fff;
+        }
+
+        /* Sección playlist / regalos / info */
+        .section-text {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+            margin-top: 6px;
+        }
+
+        .section-text strong {
+            color: #444;
+            font-weight: 600;
+        }
+
+        /* Acordeón */
+        .accordion {
+            margin-top: 4px;
+            border-radius: 18px;
+            border: 1px solid rgba(199, 217, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
+            overflow: hidden;
+        }
+
+        .accordion-item+.accordion-item {
+            border-top: 1px solid rgba(211, 225, 255, 0.8);
+        }
+
+        .accordion-header {
+            width: 100%;
+            text-align: left;
+            padding: 12px 14px;
+            background: transparent;
+            border: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .accordion-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #555;
+        }
+
+        .accordion-icon {
+            font-size: 16px;
+            color: var(--celeste-oscuro);
+            transition: transform 0.15s ease;
+        }
+
+        .accordion-item.is-open .accordion-icon {
+            transform: rotate(90deg);
+        }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease;
+            padding: 0 14px;
+        }
+
+        .accordion-inner {
+            padding-bottom: 12px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .palette-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            margin-bottom: 6px;
+        }
+
+        .palette-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .palette-dot.p1 {
+            background: #e4eefc;
+        }
+
+        .palette-dot.p2 {
+            background: #bbe2f8;
+        }
+
+        .palette-dot.p3 {
+            background: #8fb2f4;
+        }
+
+        .palette-dot.p4 {
+            background: #9493d8;
+        }
+
+        /* MODAL CONFIRMACIÓN */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 80;
+        }
+
+        .modal-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 18px 16px 16px;
+            max-width: 320px;
+            width: 90%;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+        }
+
+        .modal-card h2 {
+            font-family: "Great Vibes", "Playfair Display", serif;
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 6px;
+            color: var(--celeste-oscuro);
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(182, 211, 255, 0.9);
+            font-size: 14px;
+            margin: 10px 0 14px;
+        }
+
+        .modal-btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .modal-btn+.modal-btn {
+            margin-top: 8px;
+        }
+
+        /* Footer */
+        .footer-note {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 11px;
+            color: #888;
+        }
+
+        .footer-note span {
+            color: var(--celeste-oscuro);
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding-top: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Botón flotante de música -->
+    <button class="music-btn" id="musicBtn" aria-label="Reproducir / pausar música">
+        <span>♫</span>
+    </button>
+
+    <audio id="bgMusic" preload="auto" loop>
+        <!-- Música tomada de la página de grandes -->
+        <source src="assets/alashadas.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div class="page">
+
+        <!-- HERO + CONTADOR -->
+        <section class="card center">
+            <div class="hero-heart">
+                <img src="assets/corazon.png" alt="Corazón animado">
+            </div>
+
+            <!-- Fecha de la página de grandes -->
+            <div class="date-chip">19 DE DICIEMBRE DE 2025</div>
+
+            <div class="hero-subtitle">festejemos juntos</div>
+            <h1 class="hero-name">Taty</h1>
+            <p class="hero-tagline">Se acerca mi noche más especial y quiero vivirla con vos.</p>
+            <p class="hero-note">
+                Deslizá para descubrir todos los detalles y ayudame a hacer
+                de esta noche, un recuerdo inolvidable 💕
+            </p>
+
+            <div class="hero-divider"></div>
+
+            <div class="countdown-wrapper">
+                <div class="countdown-label">FALTAN</div>
+                <div class="countdown-grid" id="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number" data-unit="days">0</div>
+                        <div class="countdown-text">DÍAS</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" data-unit="hours">0</div>
+                        <div class="countdown-text">HORAS</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" data-unit="minutes">0</div>
+                        <div class="countdown-text">MIN</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" data-unit="seconds">0</div>
+                        <div class="countdown-text">SEG</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INFO FIESTA -->
+        <section class="card">
+            <div class="pill-title">
+                <span>✨</span> LA FIESTA
+            </div>
+
+            <div class="two-cols">
+                <div class="heart-gif">
+                    <img src="assets/corazon.png" alt="Corazón">
+                </div>
+                <div>
+                    <h2 class="section-title">¡Nos vemos en Salón Nizza (Niza Eventos)!</h2>
+                    <p class="section-subtitle">
+                        Prepará tus mejores pasos para bailar toda la noche.
+                    </p>
+                    <ul class="info-list">
+                        <li>
+                            <span class="info-label">Lugar</span>
+                            <span class="info-value">Salón Nizza (Niza Eventos)</span>
+                        </li>
+                        <li>
+                            <span class="info-label">Dirección</span>
+                            <span class="info-value">Ruta 66 Nro. 1.600 (Autopista acceso a S.S. de Jujuy)</span>
+                        </li>
+                        <li>
+                            <span class="info-label">Horario</span>
+                            <span class="info-value">21:00 hs</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-row">
+                <a class="btn btn-primary" target="_blank"
+                    href="https://www.google.com/maps/place/Niza+Eventos/@-24.248397,-65.2338122,17z/data=!3m1!4b1!4m6!3m5!1s0x941b070ec3c93995:0xc8ca4ea6a79e7fec!8m2!3d-24.248397!4d-65.2338122!16s%2Fg%2F1yj4k3rh8?entry=ttu">
+                    <span class="icon">📍</span> CÓMO LLEGAR
+                </a>
+                <!-- Botón de confirmación que abre el modal -->
+                <button class="btn btn-secondary" type="button" id="confirmBtn">
+                    <span class="icon">📩</span> CONFIRMAR ASISTENCIA
+                </button>
+            </div>
+        </section>
+
+        <!-- SLIDER FOTOS -->
+        <section class="card">
+            <div class="pill-title">
+                <span>📸</span> NUESTRA SESIÓN DE FOTOS
+            </div>
+
+            <p class="section-text">
+                Quiero compartir con vos un poquito de mi vida. Deslizá para ver algunas de mis fotos
+                favoritas 💗
+            </p>
+
+            <div class="slider" id="slider">
+                <div class="slider-track" id="sliderTrack">
+                    <!-- Podés ajustar las rutas según tus fotos -->
+                    <div class="slide"><img src="assets/foto2.jpg" alt="Foto 1"></div>
+                    <div class="slide"><img src="assets/foto1.jpg" alt="Foto 2"></div>
+                    <div class="slide"><img src="assets/foto3.jpg" alt="Foto 3"></div>
+                    <div class="slide"><img src="assets/foto4.jpg" alt="Foto 4"></div>
+                </div>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+        </section>
+
+        <!-- PLAYLIST / DETALLES -->
+        <section class="card">
+            <div class="pill-title">
+                <span>🎶</span> HAGAMOS LA NOCHE INOLVIDABLE
+            </div>
+
+            <p class="section-text">
+                Me encanta la idea de que <strong>vos también seas parte</strong> de esta fiesta desde antes de que
+                empiece.
+                Ayudame a elegir las canciones que no pueden faltar esa noche.
+            </p>
+
+            <div class="btn-row">
+                <a class="btn btn-primary" target="_blank"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSd4FTfMpqyXs8Up7Y02RtRz4ojOtuc6c8iRsvnFSrkrZmfKcw/viewform?usp=header">
+                    <span class="icon">🎧</span> SUGERIR CANCIONES
+                </a>
+            </div>
+
+            <!-- Acordeón con info -->
+            <div class="accordion" id="accordion">
+
+                <!-- ¿QUÉ ME PONGO? -->
+                <div class="accordion-item is-open">
+                    <button class="accordion-header" type="button">
+                        <span class="accordion-title">¿Qué me pongo?</span>
+                        <span class="accordion-icon">›</span>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="accordion-inner">
+                            <p>
+                                La idea es que te vengas <strong>cómoda pero canchera</strong>, con ganas de bailar toda
+                                la noche.
+                            </p>
+                            <p>
+                                Podés elegir entre un look más <strong>elegante</strong> o algo <strong>casual con
+                                    brillo</strong>.
+                                Lo importante es que te sientas vos mismo ✨
+                            </p>
+
+                            <p
+                                style="margin-top:8px; font-size:12px; text-transform:uppercase; letter-spacing:0.14em; color:#999;">
+                                PALETA DE COLORES
+                            </p>
+                            <div class="palette-row">
+                                <div class="palette-dot p1"></div>
+                                <div class="palette-dot p2"></div>
+                                <div class="palette-dot p3"></div>
+                                <div class="palette-dot p4"></div>
+                            </div>
+
+                            <p style="font-size:12px; color:#888;">
+                                Si querés, podés inspirarte en estos tonos para tu outfit (no es obligatorio) 💕
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DÍA ANTERIOR -->
+                <div class="accordion-item">
+                    <button class="accordion-header" type="button">
+                        <span class="accordion-title">Día anterior</span>
+                        <span class="accordion-icon">›</span>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="accordion-inner">
+                            <p>
+                                Te recomiendo descansar bien, hidratarte y guardar energías porque ¡vamos a bailar
+                                mucho!
+                                Si querés, podés ir pensando qué canción vas a pedirle al DJ 😉
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REGALOS (opcional para chicos, lo dejamos suave) -->
+                <div class="accordion-item">
+                    <button class="accordion-header" type="button">
+                        <span class="accordion-title">Regalos</span>
+                        <span class="accordion-icon">›</span>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="accordion-inner">
+                            <p>
+                                Lo más importante para mí es que <strong>estés esa noche</strong> compartiendo conmigo
+                                ❤️
+                                Si querés traer un detalle, cualquier cosa elegida con cariño va a ser perfecta.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <p class="footer-note">
+            Hecha con mucho <span>amor</span> para que nos veamos el 19/12/2025 💫
+        </p>
+    </div>
+
+    <!-- MODAL CONFIRMACIÓN -->
+    <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-card">
+            <h2 id="modalTitle">Confirmar asistencia</h2>
+            <input type="text" id="inputName" class="modal-input" placeholder="Tu nombre" />
+            <button id="modalSubmit" class="btn btn-primary modal-btn" type="button">Enviar</button>
+            <button id="modalCancel" class="btn btn-secondary modal-btn" type="button">Cancelar</button>
+        </div>
+    </div>
+
+    <script>
+        // === BOTÓN DE MÚSICA ===
+        (function () {
+            const btn = document.getElementById('musicBtn');
+            const audio = document.getElementById('bgMusic');
+            let isPlaying = false;
+
+            function startAtTwoSeconds() {
+                try {
+                    if (audio.currentTime < 2) {
+                        audio.currentTime = 2;
+                    }
+                } catch (e) {
+                    // silencioso
+                }
+            }
+
+            audio.addEventListener('loadedmetadata', startAtTwoSeconds);
+
+            btn.addEventListener('click', async () => {
+                if (!isPlaying) {
+                    try {
+                        await audio.play();
+                        isPlaying = true;
+                        btn.classList.add('is-playing');
+                    } catch (err) {
+                        console.error(err);
+                    }
+                } else {
+                    audio.pause();
+                    isPlaying = false;
+                    btn.classList.remove('is-playing');
+                }
+            });
+        })();
+
+        // === CONTADOR (fecha de la página de grandes) ===
+        (function () {
+            // 19/12/2025 21:00 hs (hora de Jujuy)
+            const eventDate = new Date("2025-12-19T21:00:00-03:00").getTime();
+
+            const numbers = {
+                days: document.querySelector('.countdown-number[data-unit="days"]'),
+                hours: document.querySelector('.countdown-number[data-unit="hours"]'),
+                minutes: document.querySelector('.countdown-number[data-unit="minutes"]'),
+                seconds: document.querySelector('.countdown-number[data-unit="seconds"]'),
+            };
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                let diff = eventDate - now;
+
+                if (diff < 0) diff = 0;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+
+                numbers.days.textContent = String(days);
+                numbers.hours.textContent = String(hours).padStart(2, "0");
+                numbers.minutes.textContent = String(minutes).padStart(2, "0");
+                numbers.seconds.textContent = String(seconds).padStart(2, "0");
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        })();
+
+        // === SLIDER SIMPLE (tocar / auto) ===
+        (function () {
+            const track = document.getElementById('sliderTrack');
+            const dotsContainer = document.getElementById('sliderDots');
+            if (!track || !dotsContainer) return;
+
+            const slides = Array.from(track.children);
+            const total = slides.length;
+            let index = 0;
+            let autoTimer;
+
+            // Crear dots
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+                dot.dataset.index = i.toString();
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = Array.from(dotsContainer.children);
+
+            function goTo(i) {
+                index = (i + total) % total;
+                track.style.transform = `translateX(-${index * 100}%)`;
+                dots.forEach((d, idx) => {
+                    d.classList.toggle('active', idx === index);
+                });
+            }
+
+            function startAuto() {
+                autoTimer = setInterval(() => goTo(index + 1), 5000);
+            }
+
+            function stopAuto() {
+                clearInterval(autoTimer);
+            }
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    stopAuto();
+                    goTo(Number(dot.dataset.index || 0));
+                    startAuto();
+                });
+            });
+
+            // Gestos táctiles
+            let startX = 0;
+            let isDown = false;
+
+            track.addEventListener('touchstart', (e) => {
+                isDown = true;
+                startX = e.touches[0].clientX;
+                stopAuto();
+            });
+
+            track.addEventListener('touchend', (e) => {
+                if (!isDown) return;
+                const diff = e.changedTouches[0].clientX - startX;
+                if (diff > 40) {
+                    goTo(index - 1);
+                } else if (diff < -40) {
+                    goTo(index + 1);
+                }
+                isDown = false;
+                startAuto();
+            });
+
+            // iniciar
+            goTo(0);
+            startAuto();
+        })();
+
+        // === ACORDEÓN ===
+        (function () {
+            const accordion = document.getElementById('accordion');
+            if (!accordion) return;
+
+            const items = accordion.querySelectorAll('.accordion-item');
+
+            function setMaxHeight(body, open) {
+                if (open) {
+                    body.style.maxHeight = body.scrollHeight + 'px';
+                } else {
+                    body.style.maxHeight = '0px';
+                }
+            }
+
+            items.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const body = item.querySelector('.accordion-body');
+
+                // Estado inicial
+                const isOpen = item.classList.contains('is-open');
+                setMaxHeight(body, isOpen);
+
+                header.addEventListener('click', () => {
+                    const currentlyOpen = item.classList.contains('is-open');
+                    // Cerrar todos los demás
+                    items.forEach(it => {
+                        if (it !== item) {
+                            it.classList.remove('is-open');
+                            const b = it.querySelector('.accordion-body');
+                            setMaxHeight(b, false);
+                        }
+                    });
+                    // Alternar actual
+                    item.classList.toggle('is-open', !currentlyOpen);
+                    setMaxHeight(body, !currentlyOpen);
+                });
+            });
+        })();
+
+        // === CONFIRMACIÓN (modal + Google Apps Script) ===
+        (function () {
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5PeSZdoOtheTwWxdDshOKvIc4RB5ln2DTzssvMb_xNEadDUaM6zkaPwU0jplmszRfTg/exec";
+            const proxy = "https://corsproxy.io/?";
+
+            const confirmBtn = document.getElementById('confirmBtn');
+            const modal = document.getElementById('modal');
+            const inputName = document.getElementById('inputName');
+            const submitBtn = document.getElementById('modalSubmit');
+            const cancelBtn = document.getElementById('modalCancel');
+
+            if (!confirmBtn || !modal) return;
+
+            confirmBtn.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                inputName.value = '';
+                inputName.focus();
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            submitBtn.addEventListener('click', async () => {
+                const nombre = inputName.value.trim();
+                if (!nombre) {
+                    alert("Por favor ingresá tu nombre.");
+                    return;
+                }
+                try {
+                    const resp = await fetch(proxy + SCRIPT_URL, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ nombre })
+                    });
+                    if (resp.ok) {
+                        alert("¡Gracias! Tu confirmación fue recibida.");
+                        modal.style.display = "none";
+                    } else {
+                        alert("Error al enviar. Intentá de nuevo.");
+                    }
+                } catch (err) {
+                    alert("Error de conexión. Intentá de nuevo.");
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>
