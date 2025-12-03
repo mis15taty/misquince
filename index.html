@@ -361,21 +361,17 @@
             min-width: 100%;
             position: relative;
             height: 260px;
-            /* altura fija para todos los slides */
             display: flex;
             align-items: center;
             justify-content: center;
             background: #eef4fa;
-            /* color de fondo de “marco” */
         }
 
         .slide img {
             max-width: 100%;
             max-height: 100%;
             width: auto;
-            /* que no se deforme horizontalmente */
             height: auto;
-            /* que no se deforme verticalmente   */
             display: block;
         }
 
@@ -487,19 +483,15 @@
         }
 
         .palette-dot.p1 {
-            background: #e4eefc;
+            background: #f0f0f0;
         }
 
         .palette-dot.p2 {
-            background: #bbe2f8;
+            background: #616161;
         }
 
         .palette-dot.p3 {
-            background: #8fb2f4;
-        }
-
-        .palette-dot.p4 {
-            background: #9493d8;
+            background: #020202;
         }
 
         /* MODAL CONFIRMACIÓN */
@@ -576,7 +568,6 @@
     </button>
 
     <audio id="bgMusic" preload="auto" loop>
-        <!-- Música tomada de la página de grandes -->
         <source src="assets/alashadas.mp3" type="audio/mpeg" />
     </audio>
 
@@ -588,7 +579,6 @@
                 <img src="assets/corazon.png" alt="Corazón animado">
             </div>
 
-            <!-- Fecha de la página de grandes -->
             <div class="date-chip">19 DE DICIEMBRE DE 2025</div>
 
             <div class="hero-subtitle">festejemos juntos</div>
@@ -661,7 +651,6 @@
                     href="https://www.google.com/maps/place/Niza+Eventos/@-24.248397,-65.2338122,17z/data=!3m1!4b1!4m6!3m5!1s0x941b070ec3c93995:0xc8ca4ea6a79e7fec!8m2!3d-24.248397!4d-65.2338122!16s%2Fg%2F1yj4k3rh8?entry=ttu">
                     <span class="icon">📍</span> CÓMO LLEGAR
                 </a>
-                <!-- Botón de confirmación que abre el modal -->
                 <button class="btn btn-secondary" type="button" id="confirmBtn">
                     <span class="icon">📩</span> CONFIRMAR ASISTENCIA
                 </button>
@@ -681,13 +670,37 @@
 
             <div class="slider" id="slider">
                 <div class="slider-track" id="sliderTrack">
-                    <!-- Podés ajustar las rutas según tus fotos -->
                     <div class="slide"><img src="assets/foto2.jpg" alt="Foto 1"></div>
                     <div class="slide"><img src="assets/foto1.jpg" alt="Foto 2"></div>
                     <div class="slide"><img src="assets/foto3.jpg" alt="Foto 3"></div>
                     <div class="slide"><img src="assets/foto4.jpg" alt="Foto 4"></div>
                 </div>
                 <div class="slider-dots" id="sliderDots"></div>
+            </div>
+        </section>
+
+        <!-- 💜 SECCIÓN INSTAGRAM -->
+        <section class="card">
+            <div class="pill-title">
+                <span>📱</span> MI INSTAGRAM
+            </div>
+
+            <p class="section-text center">
+                Ahí voy a subir más fotos, videos de la fiesta y todo el backstage.  
+                Seguime y etiquetame si subís algo 💕
+            </p>
+
+            <p class="section-text center" style="margin-top:10px; font-size:14px;">
+                <strong>@XV_TATII</strong> 
+                <!-- CAMBIAR ESTE USUARIO POR EL REAL -->
+            </p>
+
+            <div class="btn-row" style="margin-top:10px;">
+                <a class="btn btn-primary" target="_blank"
+                    href="https://www.instagram.com/xv_tatii">
+                    <!-- CAMBIAR EL LINK POR EL REAL -->
+                    <span class="icon">📷</span> VER EN INSTAGRAM
+                </a>
             </div>
         </section>
 
@@ -710,10 +723,7 @@
                 </a>
             </div>
 
-            <!-- Acordeón con info -->
             <div class="accordion" id="accordion">
-
-                <!-- ¿QUÉ ME PONGO? -->
                 <div class="accordion-item is-open">
                     <button class="accordion-header" type="button">
                         <span class="accordion-title">¿Qué me pongo?</span>
@@ -739,7 +749,6 @@
                                 <div class="palette-dot p1"></div>
                                 <div class="palette-dot p2"></div>
                                 <div class="palette-dot p3"></div>
-                                <div class="palette-dot p4"></div>
                             </div>
 
                             <p style="font-size:12px; color:#888;">
@@ -749,7 +758,6 @@
                     </div>
                 </div>
 
-                <!-- DÍA ANTERIOR -->
                 <div class="accordion-item">
                     <button class="accordion-header" type="button">
                         <span class="accordion-title">Día anterior</span>
@@ -766,7 +774,6 @@
                     </div>
                 </div>
 
-                <!-- REGALOS (opcional para chicos, lo dejamos suave) -->
                 <div class="accordion-item">
                     <button class="accordion-header" type="button">
                         <span class="accordion-title">Regalos</span>
@@ -779,6 +786,13 @@
                                 ❤️
                                 Si querés traer un detalle, cualquier cosa elegida con cariño va a ser perfecta.
                             </p>
+                            <div
+                                style="max-width:420px;margin:0 auto;text-align:left;font-size:0.95rem;color:#34506f;">
+                                <p><strong>CBU:</strong> 4530000800012424180844</p>
+                                <p><strong>Alias:</strong> Mis15.TATI.2025</p>
+                                <p><strong>Caja de ahorro en pesos:</strong> 1242418084</p>
+                                <p><strong>Titular:</strong> Debora Gisela Daubrowsky</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -813,9 +827,7 @@
                     if (audio.currentTime < 2) {
                         audio.currentTime = 2;
                     }
-                } catch (e) {
-                    // silencioso
-                }
+                } catch (e) {}
             }
 
             audio.addEventListener('loadedmetadata', startAtTwoSeconds);
@@ -837,9 +849,8 @@
             });
         })();
 
-        // === CONTADOR (fecha de la página de grandes) ===
+        // === CONTADOR ===
         (function () {
-            // 19/12/2025 21:00 hs (hora de Jujuy)
             const eventDate = new Date("2025-12-19T21:00:00-03:00").getTime();
 
             const numbers = {
@@ -870,7 +881,7 @@
             setInterval(updateCountdown, 1000);
         })();
 
-        // === SLIDER SIMPLE (tocar / auto) ===
+        // === SLIDER ===
         (function () {
             const track = document.getElementById('sliderTrack');
             const dotsContainer = document.getElementById('sliderDots');
@@ -881,7 +892,6 @@
             let index = 0;
             let autoTimer;
 
-            // Crear dots
             slides.forEach((_, i) => {
                 const dot = document.createElement('div');
                 dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
@@ -915,7 +925,6 @@
                 });
             });
 
-            // Gestos táctiles
             let startX = 0;
             let isDown = false;
 
@@ -937,7 +946,6 @@
                 startAuto();
             });
 
-            // iniciar
             goTo(0);
             startAuto();
         })();
@@ -950,24 +958,18 @@
             const items = accordion.querySelectorAll('.accordion-item');
 
             function setMaxHeight(body, open) {
-                if (open) {
-                    body.style.maxHeight = body.scrollHeight + 'px';
-                } else {
-                    body.style.maxHeight = '0px';
-                }
+                body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
             }
 
             items.forEach(item => {
                 const header = item.querySelector('.accordion-header');
                 const body = item.querySelector('.accordion-body');
 
-                // Estado inicial
                 const isOpen = item.classList.contains('is-open');
                 setMaxHeight(body, isOpen);
 
                 header.addEventListener('click', () => {
                     const currentlyOpen = item.classList.contains('is-open');
-                    // Cerrar todos los demás
                     items.forEach(it => {
                         if (it !== item) {
                             it.classList.remove('is-open');
@@ -975,14 +977,13 @@
                             setMaxHeight(b, false);
                         }
                     });
-                    // Alternar actual
                     item.classList.toggle('is-open', !currentlyOpen);
                     setMaxHeight(body, !currentlyOpen);
                 });
             });
         })();
 
-        // === CONFIRMACIÓN (modal + Google Apps Script) ===
+        // === CONFIRMACIÓN ===
         (function () {
             const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5PeSZdoOtheTwWxdDshOKvIc4RB5ln2DTzssvMb_xNEadDUaM6zkaPwU0jplmszRfTg/exec";
             const proxy = "https://corsproxy.io/?";
